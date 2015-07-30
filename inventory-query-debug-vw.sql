@@ -27,7 +27,7 @@ LEFT OUTER JOIN pending_orders_vw ON product.product_code = pending_orders_vw.pr
 
 CREATE OR REPLACE VIEW hum_inventory_query_debug_vw AS
 SELECT
-  location_group.name as location_group,
+    location_group.name as location_group,
     location.name as location,
     product.product_code as product_code,
     CONCAT(IFNULL(product_group_category.name, category.name), '::', product.product_code) AS cat_code,
