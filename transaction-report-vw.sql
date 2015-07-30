@@ -4,7 +4,7 @@ SELECT
     transaction_type.transaction_code,
     substr(transaction_type.name, 1, locate('|', transaction_type.name)-1) as transaction_type,
     product.product_code,
-    category.name as category,
+    IFNULL(product_group_category.name, category.name) as category,
     product.name as product,
     transaction_date,
     day(transaction_date) as day,
@@ -34,5 +34,8 @@ left join location_classification as destination_classification on destination_c
 left join location_classification as source_classification on source_classification.location_id = inventory_location.id
 left join location_group source_location_group on source_location_group.id = inventory_location.location_group_id
 left join location_group destination_location_group on destination_location_group.id = destination.location_group_id
-where transaction_type.transaction_code = 'DEBIT'
+LEFT JOIN product_group_product ON product_group_product.product_id = product.id
+LEFT JOIN product_group ON product_group.id = product_group_product.product_group_id
+LEFT JOIN category product_group_category ON product_group_category.id = product_group.category_id
+WHERE transaction_type.transaction_code = 'DEBIT'
 HAVING transaction_type = 'Transfer Out';
