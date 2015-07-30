@@ -10,13 +10,13 @@ FROM product
   LEFT JOIN inventory_snapshot AS snap
     ON snap.product_id = product.ID
   INNER JOIN location ON snap.location_id = location.id
-  LEFT JOIN location_group
+  INNER JOIN location_group
     ON (location_group.id = location.location_group_id
       AND location_group.name = 'Sierra Leone')
-  LEFT JOIN location_type
+  INNER JOIN location_type
     ON (location_type.id = location.location_type_id
       AND location_type.name LIKE 'Depot%')
-  LEFT JOIN (
+  INNER JOIN (
      SELECT product_id, location_id, MAX(date) AS maxdate
      FROM inventory_snapshot
      GROUP BY product_id, location_id
