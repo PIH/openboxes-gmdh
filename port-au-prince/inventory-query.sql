@@ -8,13 +8,13 @@ SELECT
   GetTags(product.product_code)
 FROM product
   INNER JOIN category ON product.category_id = category.id
-  LEFT JOIN inventory_snapshot AS snap
+  INNER JOIN inventory_snapshot AS snap
     ON snap.product_id = product.ID
   INNER JOIN location ON snap.location_id = location.id
-  LEFT JOIN location_group
+  INNER JOIN location_group
     ON (location_group.id = location.location_group_id
       AND location_group.name = 'Port au Prince')
-  LEFT JOIN location_type
+  INNER JOIN location_type
     ON (location_type.id = location.location_type_id
       AND location_type.name LIKE 'Depot%')
   INNER JOIN (
