@@ -22,9 +22,12 @@ CREATE OR REPLACE VIEW pending_orders_vw AS
   JOIN product ON shipment_item.product_id = product.id
   LEFT JOIN miami_inventory_snapshot_vw ON product.product_code = miami_inventory_snapshot_vw.product_code
   WHERE (shipment_status.origin_type = 'Supplier' AND shipment_status.destination = 'Miami Warehouse' AND (shipment_status.status = 'Shipped' OR shipment_status.status IS NULL))
-  OR (shipment_status.origin_type = 'Supplier' AND shipment_status.destination = 'Log Center' AND (shipment_status.status = 'Shipped' OR shipment_status.status IS NULL))
-  OR (shipment_status.origin_type = 'Supplier' AND shipment_status.destination = 'HUM Depot 1 (Picking)' AND (shipment_status.status = 'Shipped' OR shipment_status.status IS NULL))
-  OR (shipment_status.origin = 'Miami Warehouse' AND shipment_status.destination = 'Log Center' AND shipment_status.status = 'Shipped')
-  OR (shipment_status.origin = 'Miami Warehouse' AND shipment_status.destination = 'HUM Depot 1 (Picking)' AND shipment_status.status = 'Shipped')
+  OR    (shipment_status.origin_type = 'Supplier' AND shipment_status.destination = 'Log Center' AND (shipment_status.status = 'Shipped' OR shipment_status.status IS NULL))
+  OR    (shipment_status.origin_type = 'Supplier' AND shipment_status.destination = 'HUM Depot 1 (Picking)' AND (shipment_status.status = 'Shipped' OR shipment_status.status IS NULL))
+  OR    (shipment_status.origin = 'Miami Warehouse' AND shipment_status.destination = 'Log Center' AND shipment_status.status = 'Shipped')
+  OR    (shipment_status.origin = 'Miami Warehouse' AND shipment_status.destination = 'HUM Depot 1 (Picking)' AND shipment_status.status = 'Shipped')
+  OR    (shipment_status.origin = 'Boston Headquarters' AND shipment_status.destination = 'Log Center' AND shipment_status.status = 'Shipped')
+  OR    (shipment_status.origin = 'Boston Headquarters' AND shipment_status.destination = 'HUM Depot 1 (Picking)' AND shipment_status.status = 'Shipped')
+  OR    (shipment_status.origin = 'Log Center' AND shipment_status.destination = 'HUM Depot 1 (Picking)' AND shipment_status.status = 'Shipped')
   GROUP BY product.product_code;
 
