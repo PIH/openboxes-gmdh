@@ -16,5 +16,3 @@ INNER JOIN product ON product.id = inventory_level.product_id
 INNER JOIN location ON location.inventory_id = inventory.id
 INNER JOIN location_group ON location.location_group_id = location_group.id
 GROUP BY product.id, location.id;
-
-
