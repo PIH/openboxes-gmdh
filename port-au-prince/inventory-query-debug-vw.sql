@@ -7,7 +7,7 @@ SELECT
     product.name,
     snap.quantity_on_hand,
     leadtime_summary_vw.lead_time_in_days,
-    gmdh_pending_orders_vw.quantity,
+    pending_orders_vw.quantity,
     NULL, NULL, NULL
 FROM product
 INNER JOIN category ON product.category_id = category.id
@@ -20,6 +20,5 @@ LEFT OUTER JOIN leadtime_summary_vw ON (product.product_code = leadtime_summary_
 LEFT OUTER JOIN reorder_point_vw ON (product.id = reorder_point_vw.product_id AND reorder_point_vw.location_group = 'Port au Prince')
 LEFT OUTER JOIN product_group_product ON product_group_product.product_id = product.id
 LEFT OUTER JOIN product_group ON product_group.id = product_group_product.product_group_id
-LEFT OUTER JOIN category product_group_category ON product_group_category.id = product_group.category_id;
-LEFT OUTER JOIN gmdh_pending_orders_vw ON product.product_code = gmdh_pending_orders_vw.product_code;
-
+LEFT OUTER JOIN category product_group_category ON product_group_category.id = product_group.category_id
+LEFT OUTER JOIN pending_orders_vw ON product.product_code = pending_orders_vw.product_code;
