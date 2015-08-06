@@ -8,8 +8,7 @@ SELECT
     location_group.name as location_group,
     inventory_level.min_quantity,
     inventory_level.reorder_quantity,
-    inventory_level.max_quantity,
-    inventory_level.preferred
+    inventory_level.max_quantity
 FROM inventory_level
 INNER JOIN inventory ON inventory_level.inventory_id = inventory.id
 INNER JOIN product ON product.id = inventory_level.product_id
