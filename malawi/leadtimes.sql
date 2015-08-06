@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS leadtime
 );
 
 /*Import data from the CSV file */
-LOAD DATA INFILE 'leadtimes.csv' 
+LOAD DATA LOCAL INFILE 'leadtimes.csv' 
 INTO TABLE leadtime 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
