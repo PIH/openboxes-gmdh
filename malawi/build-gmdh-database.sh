@@ -11,11 +11,14 @@ PASSWORD=openboxes
 DATABASE=openboxes
 
 echo Setting environment variables
-if [ -r "setenv.sh" ]; then
-  . setenv.sh
-fi
+#if [ -f setenv.sh ]; then
+#  echo Setting custom environment variables
+#  . setenv.sh
+#fi
+cd /home/backups/bin/openboxes-gmdh/malawi
+source setenv.sh
 
-echo Executing GMDH SQL updates
+echo "Executing GMDH SQL updates against database $DATABASE as user $USERNAME"
 mysql --user="$USERNAME" --password="$PASSWORD" --database="$DATABASE" --execute="source location-classification.sql;"
 mysql --user="$USERNAME" --password="$PASSWORD" --database="$DATABASE" --execute="source update-location-classifications.sql;"
 mysql --user="$USERNAME" --password="$PASSWORD" --database="$DATABASE" --execute="source leadtimes.sql;"
