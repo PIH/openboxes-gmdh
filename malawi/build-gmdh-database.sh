@@ -1,22 +1,20 @@
 #!/bin/bash
 
-# set -x
-# trap read debug
-
 LOGFILE=`pwd`/$$.log
 exec > $LOGFILE 2>&1
 
 USERNAME=openboxes
 PASSWORD=openboxes
 DATABASE=openboxes
+MAIL=jcm62@columbia.edu
+TODAY=`date +%Y%m%d`
 
 echo Setting environment variables
-#if [ -f setenv.sh ]; then
-#  echo Setting custom environment variables
-#  . setenv.sh
-#fi
 cd /home/backups/bin/openboxes-gmdh/malawi
-source setenv.sh
+if [ -f setenv.sh ]; then
+  echo Setting custom environment variables
+  . setenv.sh
+fi
 
 echo "Executing GMDH SQL updates against database $DATABASE as user $USERNAME"
 mysql --user="$USERNAME" --password="$PASSWORD" --database="$DATABASE" --execute="source location-classification.sql;"
@@ -32,9 +30,6 @@ mysql --user="$USERNAME" --password="$PASSWORD" --database="$DATABASE" --execute
 mysql --user="$USERNAME" --password="$PASSWORD" --database="$DATABASE" --execute="source inventory-query-debug-vw.sql;"
 
 
-echo Send email to admins
-
-MAIL=jcm62@columbia.edu
-TODAY=`date +%Y%m%d`
+echo "Sending notification email to admins $MAIL"
 mailx -s "Malawitest Refresh: Successfully executed nightly GMDH scripts $TODAY" "$MAIL" < $LOGFILE
-#rm $LOGFILE
+rm $LOGFILE
