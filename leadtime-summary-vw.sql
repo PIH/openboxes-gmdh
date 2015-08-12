@@ -4,4 +4,4 @@ SELECT
     leadtime.project,
     leadtime.lead_time_in_days
 FROM leadtime
-LEFT OUTER JOIN product ON product.product_code = leadtime.product_code;
+JOIN product ON product.product_code = leadtime.product_code;
