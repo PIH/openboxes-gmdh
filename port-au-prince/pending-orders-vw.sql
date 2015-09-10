@@ -29,7 +29,7 @@ CREATE OR REPLACE VIEW miami_inventory_snapshot_vw AS
 CREATE OR REPLACE VIEW pap_pending_orders_vw AS
   SELECT
       product.product_code,
-      SUM(shipment_item.quantity + miami_inventory_snapshot_vw.quantity) as quantity
+      SUM(shipment_item.quantity) + miami_inventory_snapshot_vw.quantity as quantity
   FROM shipment_item
   JOIN shipment ON shipment.id = shipment_item.shipment_id
   JOIN shipment_status ON shipment.id = shipment_status.shipment_id
