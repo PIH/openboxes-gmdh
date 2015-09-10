@@ -20,9 +20,9 @@ CREATE OR REPLACE VIEW sl_pending_orders_vw AS
   OR    (shipment_status.origin_type = 'Supplier' AND shipment_status.destination = 'PIH Office, Freetown' AND (shipment_status.status = 'Shipped' OR shipment_status.status IS NULL))
   OR    (shipment_status.origin_type = 'Supplier' AND shipment_status.destination = 'WFP Main Logistics Hub - Port Loko' AND (shipment_status.status = 'Shipped' OR shipment_status.status IS NULL))
   OR    (shipment_status.origin_type = 'Supplier' AND shipment_status.destination = 'Kono Warehouse' AND (shipment_status.status = 'Shipped' OR shipment_status.status IS NULL))
-  OR    (shipment_status.origin = 'Boston Headquarters' AND shipment_status.destination = 'WFP DFID - restricted' AND shipment_status.status = 'Shipped')
-  OR    (shipment_status.origin = 'Boston Headquarters' AND shipment_status.destination = 'PIH Office, Freetown' AND shipment_status.status = 'Shipped')
-  OR    (shipment_status.origin = 'Boston Headquarters' AND shipment_status.destination = 'WFP Main Logistics Hub - Port Loko' AND shipment_status.status = 'Shipped')
-  OR    (shipment_status.origin = 'Boston Headquarters' AND shipment_status.destination = 'Kono Warehouse' AND shipment_status.status = 'Shipped')
+  OR    (shipment_status.origin = 'Boston HQ: SL Stock' AND shipment_status.destination = 'WFP DFID - restricted' AND shipment_status.status = 'Shipped')
+  OR    (shipment_status.origin = 'Boston HQ: SL Stock' AND shipment_status.destination = 'PIH Office, Freetown' AND shipment_status.status = 'Shipped')
+  OR    (shipment_status.origin = 'Boston HQ: SL Stock' AND shipment_status.destination = 'WFP Main Logistics Hub - Port Loko' AND shipment_status.status = 'Shipped')
+  OR    (shipment_status.origin = 'Boston HQ: SL Stock' AND shipment_status.destination = 'Kono Warehouse' AND shipment_status.status = 'Shipped')
   GROUP BY product.product_code;
 

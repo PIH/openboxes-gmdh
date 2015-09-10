@@ -23,11 +23,9 @@ CREATE OR REPLACE VIEW hum_pending_orders_vw AS
   JOIN product ON shipment_item.product_id = product.id
   WHERE (shipment_status.origin_type = 'Supplier' AND shipment_status.destination = 'HUM Depot 1 (Picking)' AND shipment_status.status = 'Shipped')
   OR    (shipment_status.origin_type = 'Supplier' AND shipment_status.destination = 'HUM Depot 1 (Picking)' AND shipment_status.status IS NULL)
-
   OR    (shipment_status.origin = 'Boston HQ: Haiti Stock' AND shipment_status.destination = 'HUM Depot 1 (Picking)' AND shipment_status.status = 'Shipped')
   OR    (shipment_status.origin = 'Miami Warehouse: Haiti Stock' AND shipment_status.destination = 'HUM Depot 1 (Picking)' AND shipment_status.status = 'Shipped')
   OR    (shipment_status.origin = 'Log Center' AND shipment_status.destination = 'HUM Depot 1 (Picking)' AND shipment_status.status = 'Shipped')
-
   OR    (shipment_status.origin = 'Bureau Fleriot PAP' AND shipment_status.destination = 'HUM Depot 1 (Picking)' AND shipment_status.status = 'Shipped')
   OR    (shipment_status.origin = 'Bureau Fleriot PAP' AND shipment_status.destination = 'HUM Depot 1 (Picking)' AND shipment_status.status IS NULL)
   GROUP BY product.product_code;

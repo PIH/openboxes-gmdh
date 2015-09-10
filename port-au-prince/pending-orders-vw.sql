@@ -42,7 +42,7 @@ CREATE OR REPLACE VIEW pap_pending_orders_vw AS
   OR    (shipment_status.origin_type = 'Supplier' AND shipment_status.destination = 'Log Center' AND shipment_status.status = 'Shipped')
   OR    (shipment_status.origin_type = 'Supplier' AND shipment_status.destination = 'Log Center' AND shipment_status.status IS NULL)
   OR    (shipment_status.origin = 'Miami Warehouse: Haiti Stock' AND shipment_status.destination = 'Log Center' AND shipment_status.status = 'Shipped')
-  OR    (shipment_status.origin = 'Boston Headquarters: Haiti Stock' AND shipment_status.destination = 'Log Center' AND shipment_status.status = 'Shipped')
-  OR    (shipment_status.origin = 'Boston Headquarters: Haiti Stock' AND shipment_status.destination = 'Miami Warehouse: Haiti Stock' AND shipment_status.status = 'Shipped')
+  OR    (shipment_status.origin = 'Boston HQ: Haiti Stock' AND shipment_status.destination = 'Log Center' AND shipment_status.status = 'Shipped')
+  OR    (shipment_status.origin = 'Boston HQ: Haiti Stock' AND shipment_status.destination = 'Miami Warehouse: Haiti Stock' AND shipment_status.status = 'Shipped')
   GROUP BY product.product_code;
 
