@@ -65,6 +65,6 @@ CREATE OR REPLACE VIEW pap_pending_orders_plus_miami_inventory_snapshot_vw AS
 CREATE OR REPLACE VIEW pap_pending_orders_vw AS
 	SELECT 
 		product_code,
-    SUM(quantity)
+    SUM(quantity) as quantity
 	FROM pap_pending_orders_plus_miami_inventory_snapshot_vw
   GROUP BY product_code;
