@@ -17,24 +17,25 @@ CREATE OR REPLACE VIEW miami_inventory_snapshot_vw AS
   SELECT
     product.product_code as product_code,
     GREATEST(SUM(inventory_snapshot.quantity_on_hand), 0) AS quantity
-  FROM inventory_snapshot
+  FROM dim_product_location
+  INNER JOIN inventory_snapshot ON (dim_product_location.product_id = inventory_snapshot.product_id
+    AND dim_product_location.location_id = inventory_snapshot.location_id
+    AND inventory_snapshot.date = (SELECT max(date) FROM inventory_snapshot))
   INNER JOIN product ON inventory_snapshot.product_id = product.id
   INNER JOIN location ON inventory_snapshot.location_id = location.id
   INNER JOIN location_group ON location_group.id = location.location_group_id
   INNER JOIN location_type ON location_type.id = location.location_type_id
-  INNER JOIN latest_inventory_snapshot AS is2 ON inventory_snapshot.location_id = is2.location_id AND inventory_snapshot.product_id = is2.product_id AND inventory_snapshot.date = maxdate
   WHERE location.name IN ('Miami Warehouse: Haiti Stock', 'Boston HQ: Haiti Stock')
   GROUP BY inventory_snapshot.product_id;
 
-CREATE OR REPLACE VIEW pap_pending_orders_vw AS
+CREATE OR REPLACE VIEW pap_pending_orders_intermediate_vw AS
   SELECT
       product.product_code,
-      SUM(shipment_item.quantity) + miami_inventory_snapshot_vw.quantity as quantity
+      SUM(shipment_item.quantity) AS quantity
   FROM shipment_item
+  JOIN product ON shipment_item.product_id = product.id
   JOIN shipment ON shipment.id = shipment_item.shipment_id
   JOIN shipment_status ON shipment.id = shipment_status.shipment_id
-  JOIN product ON shipment_item.product_id = product.id
-  LEFT JOIN miami_inventory_snapshot_vw ON product.product_code = miami_inventory_snapshot_vw.product_code
   WHERE (shipment_status.origin_type = 'Supplier' AND shipment_status.destination = 'Miami Warehouse: Haiti Stock' AND shipment_status.status = 'Shipped')
   OR    (shipment_status.origin_type = 'Supplier' AND shipment_status.destination = 'Miami Warehouse: Haiti Stock' AND shipment_status.status IS NULL)
   OR    (shipment_status.origin_type = 'Supplier' AND shipment_status.destination = 'Boston HQ: Haiti Stock' AND shipment_status.status = 'Shipped')
@@ -46,3 +47,24 @@ CREATE OR REPLACE VIEW pap_pending_orders_vw AS
   OR    (shipment_status.origin = 'Boston HQ: Haiti Stock' AND shipment_status.destination = 'Miami Warehouse: Haiti Stock' AND shipment_status.status = 'Shipped')
   GROUP BY product.product_code;
 
+
+CREATE OR REPLACE VIEW pap_pending_orders_plus_miami_inventory_snapshot_vw AS
+  SELECT
+    product_code,
+    quantity
+  FROM miami_inventory_snapshot_vw
+
+  UNION ALL
+
+  SELECT
+    product_code,
+    quantity
+  FROM pap_pending_orders_intermediate_vw;
+  
+  
+CREATE OR REPLACE VIEW pap_pending_orders_vw AS
+	SELECT 
+		product_code,
+    SUM(quantity)
+	FROM pap_pending_orders_plus_miami_inventory_snapshot_vw
+  GROUP BY product_code;
