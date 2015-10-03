@@ -1,4 +1,4 @@
-# Run every night at 12:30pm UTC / 8:30am ET
+# Run every day at 12:30pm UTC / 8:30am ET
 MAILTO=<add email addresses separated by commas>
 CONTENT_TYPE="text/html; charset=utf-8"
 SCRIPT_HOME=/home/jmiranda/openboxes-gmdh/obstaging.pih-emr.org/scripts
