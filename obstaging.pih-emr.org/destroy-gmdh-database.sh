@@ -8,5 +8,7 @@ MAIL=jcm62@columbia.edu,justin.miranda@gmail.com
 TODAY=`date +%Y-%m-%d`
 DATABASE=openboxes
 
+cd $SCRIPT_HOME
+
 echo "Executing GMDH SQL updates against database $DATABASE as user $USERNAME"
 mysql --database="$DATABASE" --execute="source destroy-gmdh-database.sql;"
