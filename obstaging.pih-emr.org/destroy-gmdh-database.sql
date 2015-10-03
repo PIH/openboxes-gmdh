@@ -1,8 +1,10 @@
+/* drop all tables */
 drop table if exists location_classification;
 drop table if exists dim_product_location;
 drop table if exists leadtime;
 drop table if exists leadtime_summary_mv;
 
+/* drop all views */
 drop view if exists consumption_report_vw;
 drop view if exists gmdh_inventory_vw;
 drop view if exists gmdh_miami_inventory_vw;
@@ -47,4 +49,6 @@ drop table if exists reorder_point_vw;
 drop table if exists shipment_status;
 drop table if exists sl_pending_orders_vw;
 drop table if exists transaction_report_vw;
+
+
 
