@@ -46,6 +46,9 @@ mysql --database="$DATABASE" --execute="source sierra-leone/pending-orders-vw.sq
 mysql --database="$DATABASE" --execute="source pending-orders-vw.sql;"
 mysql --database="$DATABASE" --execute="source leadtime-summary-vw.sql;"
 
+# Create unique index (will be replaced by OB change soon)
+mysql --database="$DATABASE" --execute="source create-indexes.sql;"
+
 echo "Sending notification email to admins $MAIL"
 mailx -s "GMDH refresh: Successfully executed nightly GMDH scripts on obstaging.pih-emr.org $TODAY" "$MAILTO" < $LOGFILE
 rm $LOGFILE
