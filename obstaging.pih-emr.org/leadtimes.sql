@@ -8,10 +8,3 @@ CREATE TABLE IF NOT EXISTS leadtime
     lead_time_in_days DECIMAL(10,2)
 );
 
-/*Import data from the CSV file */
-LOAD DATA LOCAL INFILE 'leadtimes.csv' 
-INTO TABLE leadtime 
-FIELDS TERMINATED BY ',' 
-ENCLOSED BY '"'
-LINES TERMINATED BY '\n'
-IGNORE 1 ROWS;
