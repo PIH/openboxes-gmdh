@@ -10,7 +10,7 @@ MAIL=jcm62@columbia.edu
 TODAY=`date +%Y%m%d`
 
 echo Setting environment variables
-cd /home/backups/bin/openboxes-gmdh/malawi
+cd /home/backups/bin/openboxes-gmdh/malawitest.pih-emr.org
 if [ -f setenv.sh ]; then
   echo Setting custom environment variables
   . setenv.sh
@@ -25,10 +25,10 @@ mysql --user="$USERNAME" --password="$PASSWORD" --database="$DATABASE" --execute
 mysql --user="$USERNAME" --password="$PASSWORD" --database="$DATABASE" --execute="source latest-inventory-snapshot.sql;"
 mysql --user="$USERNAME" --password="$PASSWORD" --database="$DATABASE" --execute="source reorder-point-vw.sql;"
 mysql --user="$USERNAME" --password="$PASSWORD" --database="$DATABASE" --execute="source shipment-status.sql;"
+mysql --user="$USERNAME" --password="$PASSWORD" --database="$DATABASE" --execute="source create-product-location-dimension.sql;"
 mysql --user="$USERNAME" --password="$PASSWORD" --database="$DATABASE" --execute="source pending-orders-vw.sql;"
 mysql --user="$USERNAME" --password="$PASSWORD" --database="$DATABASE" --execute="source leadtime-summary-vw.sql;"
 mysql --user="$USERNAME" --password="$PASSWORD" --database="$DATABASE" --execute="source inventory-query-debug-vw.sql;"
-
 
 echo "Sending notification email to admins $MAIL"
 mailx -s "Malawitest Refresh: Successfully executed nightly GMDH scripts $TODAY" "$MAIL" < $LOGFILE

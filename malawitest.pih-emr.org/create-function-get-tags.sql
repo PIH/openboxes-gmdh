@@ -14,7 +14,9 @@ BEGIN
     RETURN (tags);    
 END//
 DELIMITER ;
- 
+
+GRANT EXECUTE ON PROCEDURE GetTags TO 'arodriquez'@'%';
+
 /*
 SELECT product_code, GetTags(product_code) from product limit 5; 
  
