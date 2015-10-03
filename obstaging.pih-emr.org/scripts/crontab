@@ -1,2 +1,2 @@
-# Run every night at 7am UTC
-0 7 * * * /home/jmiranda/scripts/gmdh-nightly-status.sh
+# Run every night at 12:30pm UTC / 8:30am ET
+30 12 * * * /home/jmiranda/scripts/gmdh-nightly-status.sh
