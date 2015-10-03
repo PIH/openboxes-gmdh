@@ -45,6 +45,7 @@ mysql --database="$DATABASE" --execute="source port-au-prince/pending-orders-vw.
 mysql --database="$DATABASE" --execute="source sierra-leone/pending-orders-vw.sql;"
 mysql --database="$DATABASE" --execute="source pending-orders-vw.sql;"
 mysql --database="$DATABASE" --execute="source leadtime-summary-vw.sql;"
+mysql --database="$DATABASE" --execute="source leadtime-summary-mv.sql;"
 
 # Create unique index (will be replaced by OB change soon)
 mysql --database="$DATABASE" --execute="source create-indexes.sql;"
