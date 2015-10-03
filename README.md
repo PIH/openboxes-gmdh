@@ -13,3 +13,12 @@ each respective project:
 * create-function-get-tags.sql
 * leadtime-summary-vw.sql
 * inventory-query-debug-vw.sql
+
+## crontab
+If using cron to send the status update email, you'll need to add a .my.cnf to the crontab user's home directory (~/.my.cnf).
+```
+[client]
+user=openboxes
+password=openboxes
+```
+Also, you may need to specify the SCRIPT_HOME under in your crontab to point to the right directory.
