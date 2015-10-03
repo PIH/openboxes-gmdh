@@ -10,11 +10,13 @@ DATABASE=openboxes
 MAIL=jcm62@columbia.edu,justin.miranda@gmail.com
 TODAY=`date +%Y%m%d`
 
-# Hack to make sure
-echo Setting environment variables
-cd $HOME/git/openboxes-gmdh/obstaging.pih-emr.org
+# The cron process needs to change directories to find the bash and SQL files
+# e.g. SCRIPT_HOME=~/openboxes-gmdh/obstaging.pih-emr.org
+cd $SCRIPT_HOME
+
+#  Setting other environment variables
 if [ -f setenv.sh ]; then
-  echo Setting custom environment variables
+  echo "Setting custom environment variables"
   . setenv.sh
 fi
 
