@@ -24,7 +24,7 @@ echo "<html>"
 echo "<head>"
 echo "</head>"
 echo "<body>"
-
+echo "<h1>OpenBoxes GMDH Status Report</h1>"
 echo "<h2>inventory_snapshot</h2>"
 if [ "$inventorySnapshot" ] 
 then
@@ -33,7 +33,6 @@ else
     echo "No inventory snapshot data" 
 fi
 
-echo "<hr/>"
 
 echo "<h2>inventory_item_snapshot</h2>"
 if [ "$inventoryItemSnapshot" ] 
@@ -43,8 +42,6 @@ else
     echo "No inventory item snapshot data" 
 fi
 
-echo "<hr/>"
-
 echo "<h2>transaction_report_vw</h2>"
 if [ "$transactionReportVw" ] 
 then
@@ -52,8 +49,6 @@ then
 else 
     echo "No transaction report data" 
 fi
-
-echo "<hr/>"
 
 echo "<h2>leadtime_summary_vw</h2>"
 if [ "$leadtimeSummaryVw" ] 
@@ -63,8 +58,6 @@ else
     echo "No lead time summary data" 
 fi
 
-echo "<hr/>"
-
 echo "<h2>New locations (past 7 days):</h2>"
 if [ "$locations" ] 
 then
@@ -72,8 +65,6 @@ then
 else 
     echo "No new locations" 
 fi
-
-echo "<hr/>"
 
 echo "<h2>New products (past 7 days):</h2>"
 if [ "$products" ] 
@@ -83,17 +74,11 @@ else
     echo "No new locations" 
 fi
 
-echo "<hr/>"
-
 echo "<h2>Products with multiple product groups:</h2>"
 echo "<pre>$productsWithMultipleProductGroups</pre>" 
 
-#echo "<hr/>"
-
 #echo "<h2>Views:</h2>"
 #echo "<pre>$views</pre>" 
-
-#echo "<hr/>"
 
 #echo "<h2>Tables:</h2>"
 #echo "<pre>$tables</pre>" 
