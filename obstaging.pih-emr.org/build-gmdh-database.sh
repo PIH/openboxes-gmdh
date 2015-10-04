@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash 
 
 LOGFILE=`pwd`/$$.log
 exec > $LOGFILE 2>&1
@@ -31,7 +31,10 @@ cp -f $SCRIPT_HOME/leadtimes.csv /tmp/leadtimes.csv
 mysql --database="$DATABASE" --execute="LOAD DATA INFILE '/tmp/leadtimes.csv' REPLACE INTO TABLE leadtime FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\n' IGNORE 1 ROWS;"
 
 # Create functions
-mysql --database="$DATABASE" --execute="source create-function-get-tags.sql;"
+
+if ! mysql --database="$DATABASE" --execute="show create function GetTags"; then
+  mysql --database="$DATABASE" --execute="source create-function-get-tags.sql;"
+fi
 
 # Create dimension tables
 mysql --database="$DATABASE" --execute="source create-product-location-dimension.sql;"
