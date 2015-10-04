@@ -50,8 +50,8 @@ drop table if exists shipment_status;
 drop table if exists sl_pending_orders_vw;
 drop table if exists transaction_report_vw;
 
-alter table inventory_snapshot drop index inventory_snapshot_key;
-alter table inventory_item_snapshot drop index inventory_item_snapshot_key;
+#alter table inventory_snapshot drop index inventory_snapshot_key;
+#alter table inventory_item_snapshot drop index inventory_item_snapshot_key;
 
 
 
