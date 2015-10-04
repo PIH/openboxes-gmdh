@@ -7,4 +7,4 @@ select
 from product 
 left join user on user.id = product.created_by_id
 join person on user.id = person.id
-where product.date_created >= (now() - interval 7 day)\G
+where product.date_created >= (now() - interval 24 hour)\G

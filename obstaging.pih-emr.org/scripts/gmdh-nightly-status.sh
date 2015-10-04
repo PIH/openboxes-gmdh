@@ -71,7 +71,7 @@ if [ "$products" ]
 then
     echo "<pre>$products</pre>" 
 else 
-    echo "No new locations" 
+    echo "No new products"
 fi
 
 echo "<h2>Products with multiple product groups:</h2>"
