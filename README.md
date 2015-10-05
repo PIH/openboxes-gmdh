@@ -23,6 +23,21 @@ password=openboxes
 ```
 Also, you may need to specify the SCRIPT_HOME under in your crontab to point to the right directory.
 
+### Poll openboxes-gmdh github repo every 15 minutes looking for updates
+```
+MAILTO=<email-addresses>
+*/15 * * * * /home/jmiranda/scripts/poll-openboxes-gmdh.sh > /dev/null
+```
+
+### Nightly status email 
+```
+MAILTO=<config-email-addresses>
+CONTENT_TYPE="text/html; charset=utf-8"
+SCRIPT_HOME=/home/jmiranda/openboxes-gmdh/obstaging.pih-emr.org/scripts
+0 12 * * * $SCRIPT_HOME/gmdh-nightly-status.sh
+```
+
+
 ## build-gmdh-database.sh
 * Set SCRIPT_HOME in cron
 * Enable file permission in order to load from CSV
@@ -36,3 +51,4 @@ If you enncounter the following error you need to configure apparmor to allow My
 ```
 ERROR 29 (HY000) at line 1: File '/path/to/openboxes-gmdh/obstaging.pih-emr.org/leadtimes.csv' not found (Errcode: 13 - Permission denied)
 ```
+
