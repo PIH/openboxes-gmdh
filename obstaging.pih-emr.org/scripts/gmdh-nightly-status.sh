@@ -58,7 +58,7 @@ else
     echo "No lead time summary data" 
 fi
 
-echo "<h2>New locations (past 7 days):</h2>"
+echo "<h2>New locations (past 24 hours):</h2>"
 if [ "$locations" ] 
 then
     echo "<pre>$locations</pre>"
@@ -66,7 +66,7 @@ else
     echo "No new locations" 
 fi
 
-echo "<h2>New products (past 7 days):</h2>"
+echo "<h2>New products (past 24 hours):</h2>"
 if [ "$products" ] 
 then
     echo "<pre>$products</pre>" 
@@ -75,7 +75,12 @@ else
 fi
 
 echo "<h2>Products with multiple product groups:</h2>"
-echo "<pre>$productsWithMultipleProductGroups</pre>" 
+if [ "$productsWithMultipleProductGroups" ]
+then
+    echo "<pre>$productsWithMultipleProductGroups</pre>"
+else
+    echo "No products with multiple product groups"
+fi
 
 #echo "<h2>Views:</h2>"
 #echo "<pre>$views</pre>" 
