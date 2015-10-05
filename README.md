@@ -23,7 +23,9 @@ password=openboxes
 ```
 Also, you may need to specify the SCRIPT_HOME under in your crontab to point to the right directory.
 
-### Poll openboxes-gmdh github repo every 15 minutes looking for updates
+### Poll for changes
+This cron job polls the openboxes-gmdh github repo every 15 minutes looking for updates. If it finds any, 
+it will execute the build-gmdh-database.sh script.
 ```
 MAILTO=<email-addresses>
 */15 * * * * /home/jmiranda/scripts/poll-openboxes-gmdh.sh > /dev/null
