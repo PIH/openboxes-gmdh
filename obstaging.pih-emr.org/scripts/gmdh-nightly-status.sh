@@ -81,7 +81,7 @@ else
     echo "No new products"
 fi
 
-echo "<h2><ultiple product groups:</h2>"
+echo "<h2>Multiple product groups:</h2>"
 echo "Includes all products that have been added to multiple product groups."
 if [ "$productsWithMultipleProductGroups" ]
 then
