@@ -12,6 +12,8 @@ inventoryItemSnapshot=$(mysql openboxes -ss -e 'select count(*) as count, max(da
 
 transactionReportVw=$(mysql openboxes -ss -e 'select count(*) as count from transaction_report_vw\G')
 
+requisitionReportVw=$(mysql openboxes -ss -e 'select count(*) as count from requisition_report_vw\G')
+
 leadtimeSummaryVw=$(mysql openboxes -ss -e 'select project, count(*) as count from leadtime_summary_vw group by project\G')
 
 tables=$(mysql openboxes -ss -e 'show tables\G')
@@ -45,16 +47,26 @@ else
     echo "No inventory item snapshot data" 
 fi
 
-echo "<h2>Consumption data</h2>"
-echo "Shows the number of records returned by the consumption view."
+echo "<h2>Consumption data from transaction source</h2>"
+echo "Shows the number of records returned by the transaction consumption view."
 if [ "$transactionReportVw" ] 
 then
     echo "<pre>$transactionReportVw</pre>"
 else 
-    echo "No consumption data" 
+    echo "No consumption data from transaction source"
 fi
 
-echo "<h2>leadtime_summary_vw</h2>"
+echo "<h2>Consumption data from requisition source</h2>"
+echo "Shows the number of records returned by the requisition consumption view."
+if [ "$requisitionReportVw" ]
+then
+    echo "<pre>$requisitionReportVw</pre>"
+else
+    echo "No consumption data from requisition source"
+fi
+
+
+echo "<h2>Lead time summary</h2>"
 echo "Shows the number of records returned by the leadtime summary view."
 if [ "$leadtimeSummaryVw" ] 
 then
