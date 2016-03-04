@@ -11,3 +11,7 @@
 #ALTER TABLE `dim_product_location` ADD INDEX `product_location_idx` (`product_id`, `location_id`);
 #ALTER TABLE `inventory_snapshot` ADD UNIQUE INDEX `inventory_snapshot_idx` (`product_id`, `location_id`, `date`);
 #ALTER TABLE `inventory_item_snapshot` ADD UNIQUE INDEX `inventory_item_snapshot_idx` (`product_id`, `location_id`, `date`, `inventory_item_id`);
+
+ALTER TABLE requisition_item ADD FOREIGN KEY (parent_requisition_item_id) REFERENCES requisition_item(id);
+ALTER TABLE requisition_item ADD FOREIGN KEY (substitution_item_id) REFERENCES requisition_item(id);
+ALTER TABLE requisition_item ADD FOREIGN KEY (modification_item_id) REFERENCES requisition_item(id);
