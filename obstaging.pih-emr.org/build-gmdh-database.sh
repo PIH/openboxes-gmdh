@@ -41,6 +41,7 @@ mysql --database="$DATABASE" --execute="source create-product-location-dimension
 
 # Create views
 mysql --database="$DATABASE" --execute="source transaction-report-vw.sql;"
+mysql --database="$DATABASE" --execute="source requisition-report-vw.sql;"
 mysql --database="$DATABASE" --execute="source reorder-point-vw.sql;"
 mysql --database="$DATABASE" --execute="source shipment-status.sql;"
 mysql --database="$DATABASE" --execute="source mirebalais/pending-orders-vw.sql;"

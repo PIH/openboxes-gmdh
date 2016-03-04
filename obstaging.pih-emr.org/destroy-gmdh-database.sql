@@ -26,6 +26,7 @@ drop view if exists reorder_point_vw;
 drop view if exists shipment_status;
 drop view if exists sl_pending_orders_vw;
 drop view if exists transaction_report_vw;
+drop view if exists requisition_report_vw;
 
 /* Weird issue where after dropping a view, a table with the same name remains. */
 drop table if exists consumption_report_vw;
@@ -49,6 +50,7 @@ drop table if exists reorder_point_vw;
 drop table if exists shipment_status;
 drop table if exists sl_pending_orders_vw;
 drop table if exists transaction_report_vw;
+drop table if exists requisition_report_vw;
 
 #alter table inventory_snapshot drop index inventory_snapshot_key;
 #alter table inventory_item_snapshot drop index inventory_item_snapshot_key;
