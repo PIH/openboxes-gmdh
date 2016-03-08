@@ -12,7 +12,6 @@ FROM (
       AND tvw.destination_hub IN ('Mirebalais')
       AND tvw.destination_class = 'Consumption Area'
     GROUP BY tvw.year, tvw.month, tvw.product_code, tvw.category
-    ORDER BY stamp
   )
 
 	UNION ALL
@@ -25,7 +24,7 @@ FROM (
       'Missed'
     FROM requisition_report_vw AS rvw
     GROUP BY rvw.year, rvw.month, rvw.product_code, rvw.category
-    ORDER BY stamp
   )
 ) as main_query 
 GROUP BY stamp, cat_code
+ORDER BY stamp
