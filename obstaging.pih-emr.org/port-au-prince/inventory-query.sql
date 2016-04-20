@@ -1,7 +1,8 @@
 SELECT
 	CONCAT(IFNULL(product_group_category.name, category.name), '::', product.product_code) AS cat_code,
 	product.name,
-	IFNULL(GREATEST(SUM(inventory_snapshot.quantity_on_hand), 0), 0) AS qty,
+	IFNULL(GREATEST(SUM(inventory_snapshot.quantity_on_hand), 0), 0) +
+  	IFNULL(pending_inventory_vw.quantity, 0) AS qty,
 	IFNULL(leadtime_summary_vw.lead_time_in_days, 0),
 	IFNULL(pending_orders_vw.quantity, 0),
 	NULL, NULL, NULL,
@@ -20,6 +21,7 @@ LEFT OUTER JOIN product_group_product ON product_group_product.product_id = prod
 LEFT OUTER JOIN product_group ON product_group.id = product_group_product.product_group_id
 LEFT OUTER JOIN category product_group_category ON product_group_category.id = product_group.category_id
 LEFT OUTER JOIN pending_orders_vw ON (product.product_code = pending_orders_vw.product_code and pending_orders_vw.location_group = 'Port au Prince')
+LEFT OUTER JOIN pending_inventory_vw ON (product.product_code = pending_orders_vw.product_code and pending_orders_vw.location_group = 'Port au Prince')
 WHERE location_classification.classification IN ('Level 2')
 AND location_group.name = 'Port au Prince'
 GROUP BY product.id;
