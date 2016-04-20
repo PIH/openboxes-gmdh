@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash -vx
 
 echo $SCRIPT_HOME
 cd $SCRIPT_HOME

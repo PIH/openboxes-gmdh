@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash -vx
 
 LOGFILE=`pwd`/$$.log
 exec > $LOGFILE 2>&1
