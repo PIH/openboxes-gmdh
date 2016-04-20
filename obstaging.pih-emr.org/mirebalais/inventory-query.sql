@@ -20,8 +20,8 @@ LEFT OUTER JOIN leadtime_summary_vw ON (product.product_code = leadtime_summary_
 LEFT OUTER JOIN product_group_product ON product_group_product.product_id = product.id
 LEFT OUTER JOIN product_group ON product_group.id = product_group_product.product_group_id
 LEFT OUTER JOIN category product_group_category ON product_group_category.id = product_group.category_id
-LEFT OUTER JOIN pending_orders_vw ON (product.product_code = pending_orders_vw.product_code and pending_orders_vw.location_group = 'Mirebalais')
-LEFT OUTER JOIN pending_inventory_vw ON (product.product_code = pending_orders_vw.product_code and pending_orders_vw.location_group = 'Mirebalais')
+LEFT OUTER JOIN pending_orders_vw ON (product.product_code = pending_orders_vw.product_code and pending_orders_vw.location_group = location_group.name)
+LEFT OUTER JOIN pending_inventory_vw ON (product.product_code = pending_inventory_vw.product_code and pending_inventory_vw.location_group = location_group.name)
 WHERE location_classification.classification IN ('Level 2')
 AND location_group.name = 'Mirebalais'
 GROUP BY product.id;
