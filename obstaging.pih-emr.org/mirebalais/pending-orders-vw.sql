@@ -12,6 +12,11 @@
  *
  * DO NOT include quantities pending (not yet shipped) from Miami to HUM Depot 1
  * DO NOT include quantities pending (not yet shipped) from Boston to HUM Depot 1
+ *
+ * As of April 1, 2016 we no longer want to include items shipped but not received between the following locations
+ *  - Log Center -> HUM Depot 1
+ *  - Bureau Fleriot -> HUM Depot 1
+ *
  */
 CREATE OR REPLACE VIEW hum_pending_orders_vw AS
   SELECT
@@ -25,7 +30,4 @@ CREATE OR REPLACE VIEW hum_pending_orders_vw AS
   OR    (shipment_status.origin_type = 'Supplier' AND shipment_status.destination = 'HUM Depot 1 (Picking)' AND shipment_status.status IS NULL)
   OR    (shipment_status.origin = 'Boston HQ: Haiti Stock' AND shipment_status.destination = 'HUM Depot 1 (Picking)' AND shipment_status.status = 'Shipped')
   OR    (shipment_status.origin = 'Miami Warehouse: Haiti Stock' AND shipment_status.destination = 'HUM Depot 1 (Picking)' AND shipment_status.status = 'Shipped')
-  OR    (shipment_status.origin = 'Log Center' AND shipment_status.destination = 'HUM Depot 1 (Picking)' AND shipment_status.status = 'Shipped')
-  OR    (shipment_status.origin = 'Bureau Fleriot PAP' AND shipment_status.destination = 'HUM Depot 1 (Picking)' AND shipment_status.status = 'Shipped')
-  OR    (shipment_status.origin = 'Bureau Fleriot PAP' AND shipment_status.destination = 'HUM Depot 1 (Picking)' AND shipment_status.status IS NULL)
   GROUP BY product.product_code;
